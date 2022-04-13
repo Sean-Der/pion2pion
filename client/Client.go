@@ -34,7 +34,7 @@ func main() {
 	defer peer.Close()
 	peer.OnICECandidate(func(ice *webrtc.ICECandidate) {
 		if ice != nil {
-			bin, _ := json.Marshal(ice)
+			bin, _ := json.Marshal(ice.ToJSON())
 			signaler.SendSignal(Signal{Event: `ice`, Data: string(bin)})
 		}
 	})
